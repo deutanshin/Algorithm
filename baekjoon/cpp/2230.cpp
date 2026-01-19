@@ -10,51 +10,39 @@ int main(){
     unsigned int N, M;
     cin >> N >> M;
 
-    vector<unsigned int> arr(N);
+    vector<int> arr(N);
     for(int i = 0; i < N; i++){
         cin >> arr[i];
     }
 
     sort(arr.begin(), arr.end());
 
-    int idx_left = 0;
-    int idx_right = N-1;
+    int idx1 = 0;
+    int idx2 = 1;
 
-    unsigned int sub = arr[idx_right] - arr[idx_left];
-    
-    while(idx_left + 1 < idx_right){
-        unsigned int left_move = arr[idx_right] - arr[idx_left + 1];
-        unsigned int right_move = arr[idx_right - 1] - arr[idx_left];
+    unsigned min = 2000000001;
 
-        if(left_move < M && right_move < M){
-            break;
-        }
-        if(right_move < M){
-            idx_left++;
-            sub = left_move;
-            continue;
-        }
-        else if(left_move < M){
-            idx_right--;
-            sub = right_move;
-            continue;
+    while(idx2 < N){
+        // cout << "idx1: " << idx1 << " | idx2: " << idx2 << endl;
+        // cout << "now: " << arr[idx2] - arr[idx1] << endl;
+        if(arr[idx2] - arr[idx1] < M){
+            idx2++;
         }
         else{
-            if(left_move < right_move){
-                idx_left++;
-                sub = left_move;
-                continue;
+            if(arr[idx2] - arr[idx1] == M){
+                min = M;
+                break;
             }
             else{
-                idx_right--;
-                sub = right_move;
-                continue;
+                unsigned int now = arr[idx2] - arr[idx1];
+                if(min > now){
+                    min = now;
+                }
+                idx1++;
             }
         }
     }
-    
 
-    cout << sub;
-
+    cout << min << endl;
     return 0;
 }
