@@ -23,8 +23,6 @@ int main(){
     unsigned min = 2000000001;
 
     while(idx2 < N){
-        // cout << "idx1: " << idx1 << " | idx2: " << idx2 << endl;
-        // cout << "now: " << arr[idx2] - arr[idx1] << endl;
         if(arr[idx2] - arr[idx1] < M){
             idx2++;
         }
